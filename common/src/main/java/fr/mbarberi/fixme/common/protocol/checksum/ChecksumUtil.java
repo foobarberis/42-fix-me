@@ -8,7 +8,9 @@ public final class ChecksumUtil {
     if (line == null) throw new IllegalArgumentException("line is null");
     if (line.indexOf('\r') >= 0) throw new IllegalArgumentException("line must not contain CR");
     if (!line.endsWith("\n")) throw new IllegalArgumentException("line must end with LF");
-    if (line.lastIndexOf('\n') != line.length() - 1) throw new IllegalArgumentException("line must contain exactly one LF at the end");
+    if (line.indexOf('\n') != line.length() - 1) {
+      throw new IllegalArgumentException("line must contain exactly one LF at the end");
+    }
 
     int checksumFieldStart = line.lastIndexOf("|10=");
     if (checksumFieldStart < 0) throw new IllegalArgumentException("missing 10 field");
